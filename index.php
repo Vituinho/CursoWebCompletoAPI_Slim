@@ -1,8 +1,59 @@
 <?php
 
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
 require 'vendor/autoload.php';
 
 $app = new \Slim\App();
+
+$app->get('/postagens', function(Request $request, Response $response){
+
+    $response->getBody()->write('Listagem de postagens');
+
+    return $response;
+});
+
+$app->post('/usuarios/adiciona', function(Request $request, Response $response){
+
+    //Recupera post ($_POST)
+    $post = $request->getParsedBody();
+    $nome = $post['nome'];
+    $email = $post['email'];    
+
+    //Insere no banco de dados
+
+    return $response->getBody()->write($nome . " - " . $email);
+
+});
+
+$app->put('/usuarios/atualiza', function(Request $request, Response $response){
+
+    //Recupera post ($_POST)
+    $post = $request->getParsedBody();
+    $id = $post['id'];
+    $nome = $post['nome'];
+    $email = $post['email'];    
+
+    //Atualiza no banco de dados
+
+    return $response->getBody()->write("Sucesso ao atualizar: " . $id);
+
+});
+
+$app->delete('/usuarios/remove/{id}', function(Request $request, Response $response){
+
+    $id = $request->getAttribute('id'); 
+
+    //deleta no banco de dados
+
+    return $response->getBody()->write("Sucesso ao deletar: " . $id);
+
+});
+
+$app->run();
+
+/*
 
 $app->get('/postagens2', function(){
 
@@ -54,7 +105,4 @@ $app->group('/v5', function(){
     });
 
 });
-
-
-
-$app->run();
+*/
