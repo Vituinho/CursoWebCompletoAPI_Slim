@@ -60,7 +60,6 @@ $app->get('/usuarios', function(Request $request, Response $response) {
     */
 
     /* Listar */
-
     $usuarios = $db->table('usuarios')->get();
     foreach ($usuarios as $usuario) {
         echo $usuario->nome . "<br>";
