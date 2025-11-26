@@ -18,7 +18,7 @@ $tabela = 'produtos';
 
 $schema->dropIfExists($tabela);
 
-// Criar a tabela
+// Criar a tabela produtos
 $schema->create($tabela, function($table) {
 
     $table->increments('id');
@@ -47,4 +47,33 @@ $db->table($tabela)->insert([
     'fabricante' => 'Apple',
     'created_at' => '2020-01-10',
     'updated_at' => '2020-01-10'
+]);
+
+$db = $container->get('db');
+
+$schema = $db->schema();
+$tabela = 'usuarios';
+
+$schema->dropIfExists($tabela);
+
+// Criar a tabela usuarios
+$schema->create($tabela, function($table) {
+
+    $table->increments('id');
+    $table->string('nome', 100);
+    $table->string('email', 150);
+    $table->string('senha', 32);
+
+});
+
+$db->table($tabela)->insert([
+    'nome' => 'Jamilton Damasceno',
+    'email' => 'jamilton@gmail.com',
+    'senha' => 123456
+]);
+
+$db->table($tabela)->insert([
+    'nome' => 'Jorge Sant Anna',
+    'email' => 'jorge@gmail.com',
+    'senha' => 123456
 ]);
